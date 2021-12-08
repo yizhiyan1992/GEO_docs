@@ -55,14 +55,16 @@ other less common geometry objects:
 - multipolygon
 
 **shapely** can also load string data, which functions similar to pickle:
+
 ```python
 from shapely import wkt
 wkt.loads('POINT (3 5)')
 ```
 
-```GeometryCollection()``` can view all geometry objects.
+`GeometryCollection()` can view all geometry objects.
 
 How to get the coordinates of objects?
+
 ```python
 np.array(obj.coords) # return a np.ndarray
 list(obj.coords) # return a list of tuples
@@ -70,13 +72,34 @@ list(obj.coords) # return a list of tuples
 
 other useful methods:
 
-```obj.project()```
+`obj.project()`
 
-```obj.interpolate()```
+`obj.interpolate()`
 
-```obj.intersection()```
+`obj.intersection()`
 
-```polygon.contains(point)```
+`polygon.contains(point)`
 
 reads:
+
 - [Geospatial adventures. Step 1: shapely](https://towardsdatascience.com/geospatial-adventures-step-1-shapely-e911e4f86361)
+
+## Lesson 2- Vector data I/O and Coordinate systems
+
+main goals:
+
+- read and write from/to shapefile
+- create geometrics into GeoDataFrame
+- change the coordinate reference system of the data
+
+basic concepts:
+
+- shapefile: a **vector** data format for storing location information and related attributes. (contains several files .shp, .shx, .dbf, .prj etc.) The shapefile is developed by ESRI.
+- geopackage: an open source format for storing and transferring geospatial information. GeoPackage is a container for an SQLite database with a .gpkg extension.
+- CRS: coordinate reference system defines how coordinates relate to real locations on the Earth.
+- datum: defines the center point, orientation, and scale of the reference surface related to a coordinate reference system. Same coordinates can relate to different locations depending on Datum.
+- EPSG: Europe Petroleum Survey Group, a special reference systems.
+
+## GeoPandas
+
+- The main difference between geodataframe and dataframe is that a geodataframe should contain one column for geometries.
