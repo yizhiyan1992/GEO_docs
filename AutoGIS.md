@@ -13,7 +13,8 @@ p2=Point(2,2)
 p2_3d=Point(3,5,1)
 print(p1.geom_type) # get the geomtry type
 p1.coords.xy # get the coordinate of point1
-d=p1.distance(p2) #get the distance between p1 and p2
+d=p1.distance(p2) # get the distance between p1 and p2
+p1.name = "point 1" # define the name of p1
 ```
 
 create a LineString object:
@@ -26,6 +27,7 @@ l2 = LineString([(2,2), (5,7)])
 l1.xy # get the coordinates of l1
 l1.length # get the length
 l1.centroid # get the centroid
+p1.distance(l1) # the distance between point to line segment
 ```
 
 create polygon object:
@@ -43,6 +45,7 @@ poly1.area # get the area
 poly1.bounds # get the bounding box of the polygon
 poly1.exterior # get the exterior
 poly.length # get the length of object
+p1.buffer(radius) # create a buffer ring
 ```
 
 other less common geometry objects:
@@ -50,3 +53,30 @@ other less common geometry objects:
 - multipoints
 - multilines
 - multipolygon
+
+**shapely** can also load string data, which functions similar to pickle:
+```python
+from shapely import wkt
+wkt.loads('POINT (3 5)')
+```
+
+```GeometryCollection()``` can view all geometry objects.
+
+How to get the coordinates of objects?
+```python
+np.array(obj.coords) # return a np.ndarray
+list(obj.coords) # return a list of tuples
+```
+
+other useful methods:
+
+```obj.project()```
+
+```obj.interpolate()```
+
+```obj.intersection()```
+
+```polygon.contains(point)```
+
+reads:
+- [Geospatial adventures. Step 1: shapely](https://towardsdatascience.com/geospatial-adventures-step-1-shapely-e911e4f86361)
