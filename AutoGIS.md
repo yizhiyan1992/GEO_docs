@@ -103,3 +103,42 @@ basic concepts:
 ## GeoPandas
 
 - The main difference between geodataframe and dataframe is that a geodataframe should contain one column for geometries.
+
+- data types:
+  - GeoDataFrame
+  - GeoSeries
+
+how to read/write shapefile?
+
+```python
+import geopandas as gpd
+gpd.read_file("xxx.shp")
+gpd.to_file(file_name, path)
+```
+
+:heavy_exclamation_mark: To read .shp file, the .shp file must in a folder that contains .shx, .prj, .dbf files.
+
+`gpd.io.file.fiona.drvsupport.supported_drivers` will tell all supported file types.
+
+how to construct a geodataframe:
+
+1. pass the dataframe that contains 'geometry' column
+2. pass the shapely object with arg geometry = [Point/LineString/Polygon...]
+
+visualize the geometries:
+
+```python
+%matplotlib inline
+gpd_data.plot()
+
+gpd_data['centroid'] = gpd_data.centroid # get the centroid of each object
+gpd_data = gpd_data.set_geometry('centroid) # reset the geometry columns
+```
+
+some useful methods from pandas (also apply to geopandas):
+
+`df.iterrows()` : return the index and series object of each row
+
+`df.unique()` : return the unique objects
+
+`df.groupby` : return the keys and df corresponding to each key.
