@@ -142,3 +142,27 @@ some useful methods from pandas (also apply to geopandas):
 `df.unique()` : return the unique objects
 
 `df.groupby` : return the keys and df corresponding to each key.
+
+## Lesson 3- GeoCoding/ Query spatial index/ spatial analysis
+
+Concepts:
+
+- Geocoding: Geocoding is the process of transforming place names or addresses into coordinates. (e.g. find coordinates using address)
+
+- Reverse geocoding: A process that uses coordinates to identify the street addresses or other features.
+
+### Q: how to check if a point is in a polygon?
+
+Shapely
+
+`Point.within(Polygon)`
+
+`Polygon.contains(Point)`
+
+It works the same for GeoDataFrame
+
+`gdf.within(polygon)`
+
+### Q: how to boost spatial queries?-Spatial Index
+
+[document](https://automating-gis-processes.github.io/site/notebooks/L3/spatial_index.html)
