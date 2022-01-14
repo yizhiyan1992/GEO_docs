@@ -166,3 +166,49 @@ It works the same for GeoDataFrame
 ### Q: how to boost spatial queries?-Spatial Index
 
 [document](https://automating-gis-processes.github.io/site/notebooks/L3/spatial_index.html)
+
+### Q: how to find the nearest points?
+
+```python
+from shapely.ops import nearest_points
+shapely.ops.nearest_points(geom1, geom2)
+#Returns a tuple of the nearest points in the input geometries.
+
+# nearest_points can also be applied to get the point between point and linestring or polygon.
+```
+
+The `nearest_points` method can be quite low efficient for large scale dataset. For large-scale dataset, consider using **BallTree** or **KDTree**.
+
+### Q: how to find the nearest point for a column of points?
+
+build a geodataframe and use .apply() function.
+
+### Metrics for examing distance
+
+- Euclidean distance
+
+  Euclidean distance does not apply well for high-dimension data. The distance will be skewed if the units are different for different dimensions.
+
+- Cosine similarity
+
+  It applies well for high-dimension data. However, it cannot measure the gratitude of the difference.
+
+- Hamming distance
+
+  Measure the difference for strings with equal length.
+
+- Manhattan Distance
+
+  Integer computation is faster than float computation.
+
+- Chebyshev Distance
+
+- Minkowski distance
+
+- Jaccard similarity
+
+  Intersection/Union. Mostly used in text processing and image processing.
+
+- Haversine distance
+
+  Calculate the shortest distance for two points on sphere. If the shape is ellipsoid, we should use `vincenty distance`.
