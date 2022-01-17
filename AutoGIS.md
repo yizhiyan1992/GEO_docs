@@ -212,3 +212,38 @@ build a geodataframe and use .apply() function.
 - Haversine distance
 
   Calculate the shortest distance for two points on sphere. If the shape is ellipsoid, we should use `vincenty distance`.
+
+### Spatial index searching trees
+
+- k-d (k-dimensional) tree
+  ![k-d tree](./pictures/kdtree.jpg)
+
+  Description:
+
+  a k-d tree is a space-partitioning data structure for organizing points in a k-dimensional spaces. K-d trees are useful for several applications, such as searches involving a multidimensional search key (range searches and nearest neighbor searches) and creating point clouds.
+
+  Time complexity:
+  | algorithm | average | worst case |
+  |-----------|---------|------------|
+  | space | O(n) | O(n) |
+  | search| O(logn)| O(n) |
+  | insert| O(logn)| O(n) |
+  | delete| O(logn)| O(n) |
+
+  Construction process:
+
+  - as one moves down the tree, one cycles through the axes used to select the splitting planes.
+  - Points are inserted by selecting the median of the points being put into the subtree, with respect to their coordinates in the axis being used to create the splitting plane.
+
+  Nearest neighbor searching process:
+
+  1. start with root node, the algorithm moves down the tree recursively. It goes down left or right depending on whether the point is lesser than or greater than the current node in the split dimension.
+
+  2. Once the algorithm reaches a leaf node, it checks that node point and if the distance is better, that node point is saved as the "current best".
+
+  3. the algorithm unwinds the recursion of the tree, performing the following steps at each node:
+     - if the current node is closer than the curren best, then it becomes the current best.
+     - the algorithm checkes whether there could be any points on the other side of the splitting plane that are closer to the search point than the current best.
+       - if the hypershpere crosses the plane, there could be nearer points on the other side of the planes, so the algorithm must move down the other branch of the tree from the current node looking for closer points, following the same recursive process as the entire search.
+       - if the hyoersphere does not intersect the splitting plane, then the algorithm continues walking up the tree, and the entire branch on the other side of that node is eliminated.
+  4. when the algorithm finishes this process for the root node, then the search is complete.
