@@ -183,6 +183,24 @@ The `nearest_points` method can be quite low efficient for large scale dataset. 
 
 build a geodataframe and use .apply() function.
 
+### Spatial join
+
+- definition: getting attributes from one layer and transferring them into another layer based on their spatial relationship.
+
+- geopandas.sjoin() allows to perform spatial join. There are three possible types of join:
+
+  - intersects
+  - within
+  - contains
+
+- "how" parameter: left, right, inner (default)
+
+- Note that before performing spatial join, we need to check the coordinate projection for both GDF.
+
+### Other combining methods (merge, join, concatenate, and compare) in GeoPandas
+
+Implement later...
+
 ### Metrics for examing distance
 
 - Euclidean distance
@@ -247,3 +265,6 @@ build a geodataframe and use .apply() function.
        - if the hypershpere crosses the plane, there could be nearer points on the other side of the planes, so the algorithm must move down the other branch of the tree from the current node looking for closer points, following the same recursive process as the entire search.
        - if the hyoersphere does not intersect the splitting plane, then the algorithm continues walking up the tree, and the entire branch on the other side of that node is eliminated.
   4. when the algorithm finishes this process for the root node, then the search is complete.
+
+- R-tree
+  R-tree are tree data structures used for spatial access methods. For indexing multi-dimensional information such as points, linestrings, or polygons. A common real-world usage for R-tree might be to store spatial objects such as restaurant locations or the polygons that typical maps are made of street, buildings, etc. and then find answers quickly to queries such as: "find all museums within 2km of my current location", "retrieve all road segments within 2km of my location", or "find the nearest gas station".
