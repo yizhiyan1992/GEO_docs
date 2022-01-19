@@ -199,7 +199,30 @@ build a geodataframe and use .apply() function.
 
 ### Other combining methods (merge, join, concatenate, and compare) in GeoPandas
 
-Implement later...
+- append: merge rows from one table to the other. Note that the columns names should be matched for two tables.
+
+- attribute joins: attribute joins are accomplished using the merge().
+
+- spatial joins: in a spatial join, two geometry objects are merged based on their spatial relationship to one another.
+
+  - .sjoin(): join based on binary predicates.
+  - .sjoin_nearest(): join based on proximity, with the ability to set a maximum search radius.
+  - predicate argument:
+    - intersects
+    - contains
+    - within
+    - touches
+    - crosses
+    - overlaps
+  - how argument:
+    - left
+    - right
+    - inner (default)
+
+- clip: clip points, lines, or polygon geometries to the mask extent. Both layers must be in same crs. The gdf will be clipped to the full extext of the clip object.
+
+- set-operation with overlay: when working with multiple spatial datasets- users oftern wish to create new shapes based on places where those datasets overlap.
+  `df1.overlay(df2,how='union')`
 
 ### Metrics for examing distance
 
@@ -234,7 +257,8 @@ Implement later...
 ### Spatial index searching trees
 
 - k-d (k-dimensional) tree
-  ![k-d tree](./pictures/kdtree.jpg)
+
+  <img src="./pictures/kdtree.jpg" width=500 />
 
   Description:
 
