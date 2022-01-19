@@ -258,7 +258,7 @@ build a geodataframe and use .apply() function.
 
 - k-d (k-dimensional) tree
 
-  <img src="./pictures/kdtree.jpg" width=500 />
+  <img src="./pictures/kdtree.jpg" width="500" />
 
   Description:
 
@@ -292,3 +292,15 @@ build a geodataframe and use .apply() function.
 
 - R-tree
   R-tree are tree data structures used for spatial access methods. For indexing multi-dimensional information such as points, linestrings, or polygons. A common real-world usage for R-tree might be to store spatial objects such as restaurant locations or the polygons that typical maps are made of street, buildings, etc. and then find answers quickly to queries such as: "find all museums within 2km of my current location", "retrieve all road segments within 2km of my location", or "find the nearest gas station".
+
+### Spatial index in GeoPandas
+
+- Geopandas offers built-in support for spatial indexing using an R-Tree algorithm. Depending on the ability to import `pygeos`, GeoPandas will either use pygeos.STRtree or rtree.index.Index. `GeoSeries.sindex` creates a spatial index, wich can use the methods and properties documented below:
+
+| method                                  | descrption                                                                                                                                                            |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intersection`                          | compability wrapper for rtree.index.Index.intersection, use `query` instead.                                                                                          |
+| `nearest(*args,**kwargs)`               | return the nearest geometry in the tree for each input geometry in `geometry`                                                                                         |
+| `query(geometry[, predicate, sort])`    | return the index of all geometries in the tree with extents that intersect the envelope of the input geometry                                                         |
+| `query_bulk(geometry[,predicate,sort])` | Returns all combinations of each input geometry and geometries in the tree where the envelope of each input geometry intersects with the envelope of a tree geometry. |
+| `valid_query_predicates`                | Returns valid predicates for this spatial index.                                                                                                                      |
