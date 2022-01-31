@@ -143,6 +143,15 @@ some useful methods from pandas (also apply to geopandas):
 
 `df.groupby` : return the keys and df corresponding to each key.
 
+### EPSG: European petroleum servey group
+
+- It is a public registry of geodetic datums, spatial reference system, Earth ellipsoids, coordinate transformations and related unit of measurement. Each entity is assigned an EPSG code between 1024-32767, along with a standard machine readable well-known text (WTK) representationm.
+- common EPSG codes:
+
+  - EPSG:4326 -WGS84 (gps coordinate system)
+  - EPSG:3857 -Web mercator projection (used by Google Map and OpenstreetMap)
+  - EPSG: 7789 - International terrestrial reference frame 2014.
+
 ## Lesson 3- GeoCoding/ Query spatial index/ spatial analysis
 
 Concepts:
@@ -304,3 +313,41 @@ build a geodataframe and use .apply() function.
 | `query(geometry[, predicate, sort])`    | return the index of all geometries in the tree with extents that intersect the envelope of the input geometry                                                         |
 | `query_bulk(geometry[,predicate,sort])` | Returns all combinations of each input geometry and geometries in the tree where the envelope of each input geometry intersects with the envelope of a tree geometry. |
 | `valid_query_predicates`                | Returns valid predicates for this spatial index.                                                                                                                      |
+
+## Lesson 4- Geometric operations and data reclassification
+
+### Data reclassification
+
+`PySAL/mapclassify` module is an extensive Python library for spatial analysis. It includes all of the most common data classifier that are used commonly.
+
+Q: How to classify the DataFrame based on a certain feature?
+
+```python
+import mapclassify
+classifier=mapclassify.Quantile.make(k=5) # return a function
+df[['feature']].apply(classifier)
+
+df.count() # count the non NAN value in each row or column
+df.count_values() # count the unique values in a row or column
+```
+
+### Aggregating data
+
+Combine the data into groups. For example, aggregate data in same district. We can use `dissolve(by=)` to perform aggregation.
+
+### Map tile
+
+- what is maptile?
+
+  Map tile is a map displayed in a web browser by seamlessly joining dozens of individually requested image or vector data files. The first map tile used raster files, before the emergence of vector tiles.
+
+- why use map tiles?
+
+  map tile can be cached, and map tile can increase the transmission efficiency and reduce the server's pressure.
+
+- Google Map conventions:
+
+  - tiles are 256\*256 pixels
+  - at the outer most zoom level (0), the entire world can be rendered in a single map.
+  - each zoom level doubles in both dimensions
+  - the web mercator projection is used with latitude limits of aorund 85 degrees.
