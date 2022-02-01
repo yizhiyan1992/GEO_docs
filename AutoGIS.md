@@ -351,3 +351,18 @@ Combine the data into groups. For example, aggregate data in same district. We c
   - at the outer most zoom level (0), the entire world can be rendered in a single map.
   - each zoom level doubles in both dimensions
   - the web mercator projection is used with latitude limits of aorund 85 degrees.
+
+### Lesson 5: creating interactive maps in Python
+
+#### **Folium**
+
+- What is Folium?
+
+  -`Folium` is a python library used for visualizing geospatial data. It is easy to use and yet a powerful library. Folium is a python wrapper for `Leaflet.js` which is a leading open-source JS library for plotting interactive maps.
+
+- create a map object
+
+```python
+import folium
+m=folium.Map(location=[lat, lon], width= , height= ,zoom_start= )
+```
