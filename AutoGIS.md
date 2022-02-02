@@ -352,7 +352,7 @@ Combine the data into groups. For example, aggregate data in same district. We c
   - each zoom level doubles in both dimensions
   - the web mercator projection is used with latitude limits of aorund 85 degrees.
 
-### Lesson 5: creating interactive maps in Python
+## Lesson 5: creating interactive maps in Python
 
 #### **Folium**
 
@@ -366,3 +366,15 @@ Combine the data into groups. For example, aggregate data in same district. We c
 import folium
 m=folium.Map(location=[lat, lon], width= , height= ,zoom_start= )
 ```
+
+A tutorial on how to use Folium for network visualization: [click here](https://github.com/yizhiyan1992/GEO_docs/blob/main/tutorial_examples/folium_tutorial.ipynb)
+
+## Lesson 6: Open street map data/OSMnx packages/Network analysis
+
+### OSMnx package
+
+### Networkx package
+
+`Networkx` is a python module that provides tools for analyzing networks in various different ways. It also contains algorithms such as `Dijkstra` or `A*` algorithm that are commonly used to find shortest paths along transportation network.
+
+Add later...
