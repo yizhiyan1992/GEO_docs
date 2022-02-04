@@ -378,3 +378,33 @@ A tutorial on how to use Folium for network visualization: [click here](https://
 `Networkx` is a python module that provides tools for analyzing networks in various different ways. It also contains algorithms such as `Dijkstra` or `A*` algorithm that are commonly used to find shortest paths along transportation network.
 
 Add later...
+
+## Appendix 1: Coordinate Reference System (CRS)
+
+### **projected reference system (PCS)**
+
+A projected coordinate system is a flat, two-dimensional representation of the earth. It is based on a shpere or spheroid geographic coordinate system, but it uses linear units of measure for coordinates, so that calculations of distance and area are easily done in terms of those same units.
+
+The process of converting from geodetic coordinates to projected coordinate is called **map projection**. Map projections are usually classified by the projection surface used, such as conic, cylindrical, and planer surfaces. Different spatial properties will appear distorted (distance, area, shape, etc.).
+
+#### **Mercator projection**
+
+The mercator projection is a cylindrical map projection presented by Flemish geographer and cartographer Gerardus Mercator in 1569. As in all cylindrical projections, parallers and meridians on the Mecator are straight and perpendicular to each other. Because the linear scale of a Mercator map increases with latitude, it distorts the size of geographical objects far from the equator and conveys a distorted percetion of the overall geometry of the planet. At latitudes greater than 70 north or south the Mercator projection is practically unusable.
+
+#### **Web Mercator projection**
+
+### **cartesian spatial reference system**
+
+#### **Earth-centered, Earth-fixed coordinate system (ECEF)**
+
+The ECEF (also known as geocentric coordinate system) is a cartesian spatial reference system that represents locations in the vicinity of thr Earth as X, Y, and Z measurements from its center of mass.
+
+#### **Local east, north, up (ENU) coordinates**
+
+The local ENU coordinates are formed from a plane tangent to the Earth's surface fixed to a specific location and hence it is sometimes known as a "local tangent" or "local geodetic" plane. This coordinate system is best used for smaller area extents where the curvature of the earth is not a concern (less than 4km).
+
+#### **coordinate system conversion**
+
+1. geodetic (lat/lon) to/from ECEF
+2. geodetic to/from ENU coordinates
+   [wiki](https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates)
