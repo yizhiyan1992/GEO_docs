@@ -424,3 +424,88 @@ The local ENU coordinates are formed from a plane tangent to the Earth's surface
 1. geodetic (lat/lon) to/from ECEF
 2. geodetic to/from ENU coordinates
    [wiki](https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates)
+
+## Appendix 2: Geographical files format
+
+Geospatial file extensions:
+https://gisgeography.com/gis-formats/
+
+### **shapefile (.shp)**
+
+The `shapefile` format is a geospatial **_vector data_** format for geographic information system (GIS) software. It is developed and regulated by Esri. The shapefile format can spatially describe vector features: points, lines, polygons. Each item usually has attributes that describe it, such as name or temperature.
+
+The format consists of a collection of files with common filename prefix, stored in the same directories. Three mandatory files have filename extensions `.shp`,`.shx`,`.dbf`.
+
+- `.shp`: shape format, the feature geometry itself
+- `.shx`: shape index format; a positional index of the feature geometry to allow seeking forwards and backwards quickly.
+- `.dbf`: attribute format; columnar attributes for each shape
+
+Other files include `.prj` (projection description using wkt representation of coordinate reference systems); `.sbn` and `.sbx` (a spatial index of features), and so on.
+
+Limitation of shapefile:
+
+- The shapefile format does not have the ability to store topological information.
+- A shapefile should contain only one type of geometries.
+
+### **GeoPackage (.gpkg)**
+
+A GPKG is an open, non-proprietary, platform-independent and standards-based data format for geographic information system implemented as a SQLite database container. GPKG can store both raster and vector data.
+
+GeoPackage was designed to be as lightweight as possible and be contained in one ready-to-use single file. The GPKG extension F.3 RTree spatial indexes specifies how to use SQLite spatial indexes in order to speed up performance on spatial queries compared to traditional geospatial files formats.
+
+### **Keyhole Markup Language (.kml, .kmz)**
+
+KML is an XML notation for expressing geographic annotation and visualization within two-dimensional maps and three-dimensional Earth browsers. It was developed for use with Goole Earth. The KML file specifies a set of features (place marks, images, polygons, 3d models, textual descriptions, etc.) that can be displayed on maps in gepspatial software implementing the KML encoding.
+
+KML files are very often distributed in KMZ files, which are zipped KML files with a `.kmz` extension. An example KML document is:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<Placemark>
+  <name>New York City</name>
+  <description>New York City</description>
+  <Point>
+    <coordinates>-74.006393,40.714172,0</coordinates>
+  </Point>
+</Placemark>
+</Document>
+</kml>
+```
+
+### **GeoJSON**
+
+GeoJson is an open standard format designed for representing simple geographical features, along with their non-spatial attributes. It is based on the JSON format. The features include point, line strings, and polygons, and **_multi-part collections of these types_**.
+
+An example GeoJSON file:
+
+```javascript
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [102.0, 0.5]
+      },
+      "properties": {
+        "prop0": "value0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [102.0, 0.0], [103.0, 1.0], [104.0, 0.0], [105.0, 1.0]
+        ]
+      },
+      "properties": {
+        "prop0": "value0",
+        "prop1": 0.0
+      }
+    },
+}
+```
