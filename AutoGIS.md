@@ -393,6 +393,22 @@ The mercator projection is a cylindrical map projection presented by Flemish geo
 
 #### **Web Mercator projection**
 
+TBD......
+
+#### **Universal Transverse Mercator (UTM)**
+
+The UTM system divides the Earth into 60 zones, each 6° of longitude in width. Zone 1 covers longitude 180° to 174° W; zone numbering increases eastward to zone 60, which covers longitude 174°E to 180°. The polar regions south of 80°S and north of 84°N are excluded.
+
+**How to locate a position using UTM coordinates?**
+
+A position on the Earth is given by the UTM zone number and band letter and the easting and northing planar coordinate pair in that zone and band.
+
+The point of origin of each UTM zone is the intersection of the equator and the zone's central meridian. To avoid dealing with negative numbers, the central meridian of each zone is defined to coincide with 500000 meters East. In any zone a point that has an easting of 400000 meters is about 100 km west of the central meridian. For most such points, the true distance would be slightly more than 100 km as measured on the surface of the Earth because of the distortion of the projection. UTM eastings range from about 167000 meters to 833000 meters at the equator.
+
+In the northern hemisphere positions are measured northward from zero at the equator. The maximum "northing" value is about 9300000 meters at latitude 84 degrees North, the north end of the UTM zones. The southern hemisphere's northing at the equator is set at 10000000 meters. Northings decrease southward from these 10000000 meters to about 1100000 meters at 80 degrees South, the south end of the UTM zones. Therefore, no point has a negative northing value.
+
+For example, the CN Tower is at 43°38′33.24″N 79°23′13.7″W, which is in UTM zone 17, and the grid position is 630084 m east, 4833438 m north. Two points in Zone 17 have these coordinates, one in the northern hemisphere and one in the south; the non-ambiguous format is to specify the full zone and band, that is, "17T 630084 4833438". The provision of the latitude band along with northing supplies useful redundant information.
+
 ### **cartesian spatial reference system**
 
 #### **Earth-centered, Earth-fixed coordinate system (ECEF)**
