@@ -152,6 +152,56 @@ some useful methods from pandas (also apply to geopandas):
   - EPSG:3857 -Web mercator projection (used by Google Map and OpenstreetMap)
   - EPSG: 7789 - International terrestrial reference frame 2014.
 
+### Formats of CRS
+
+Three common formats of CRS include:
+
+- proj4
+
+  Proj or Proj.4 strings are a compact way to identify a spatial or coordinate reference system. Using thr `PROJ.4` syntax, you specify the complete set of parameters including the ellipse, datum, projection units and projection definition that define a particular CRS.
+
+  An example of proj.4 format:
+
+  > +proj=utm +zone=11 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0
+
+- EPSG
+
+  The EPSG codes are 4-5 digit numbers that represent CRSs definition.
+
+  > crs={'init': 'spsg:4326'}
+
+- well-known text (WKT)
+
+  It's useful to recognize this format given many tools - including ESRI's ArcMap and ENVI use this format. WKT is a for compact machine- and human-readable representation of geometric objects. It defines elements of crs definition using a combination of brackets `[]` and elements separated by commas `,`. Notice that the elements are described explicitly using all caps.
+
+  > GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137,298.257223563]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]]
+
+**CRS formats transformation using `pyproj`**
+
+```python
+from pyproj import CRS
+
+gdf_data.crs # return a dictionary describing CRS
+
+# Initialize the CRS class for epsg code
+crs_object=CRS.from_epsg(3035)
+
+# get the attributes of CRS
+crs_object.name
+crs_object.coordinate_system
+crs_object.area_of_use
+
+# retrieve CRS information in WKT format
+crs_wkt=crs_object.to_wkt()
+# retrieve CRS information in epsg format
+crs_epsg=crs_object.to_epsg()
+crs_epsg=crs_object.to_epsg(min_confidence=25) # when we have incomplete information
+# retrieve CRS information in proj format
+crs_proj4=crs_object.to_proj4()
+# re-define the CRS of the input GeoDataFrame
+data.crs = CRS.from_epsg(3035).to_wkt()
+```
+
 ## Lesson 3- GeoCoding/ Query spatial index/ spatial analysis
 
 Concepts:
