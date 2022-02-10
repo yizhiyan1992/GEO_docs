@@ -474,6 +474,10 @@ KML files are very often distributed in KMZ files, which are zipped KML files wi
 </kml>
 ```
 
+### **Geography Markup Language (.gml)**
+
+GML allows for the use of geographic coordinates extension of XML. And extensibile markup language (xml) is both human-readable and machine-readable.
+
 ### **GeoJSON**
 
 GeoJson is an open standard format designed for representing simple geographical features, along with their non-spatial attributes. It is based on the JSON format. The features include point, line strings, and polygons, and **_multi-part collections of these types_**.
@@ -509,3 +513,25 @@ An example GeoJSON file:
     },
 }
 ```
+
+### **OpenStreetMap OSM XML (.OSM)**
+
+OSM files are the native file for openstreetmap which had become the largest crowdsourcing GIS data project in the world. These files are a collection of vector features from crowd-sourced contributions from the open community.
+
+The GIS format OSM is XML-based file format. The more efficient, smaller PBF format is an alternative to the XML-based format. QGIS can parse the osm data as well.
+
+### **Tiff and GeoTiff (.tif)**
+
+A GeoTiff is a standard `.tif` or image file format that includes additional spatial (georeferencing) information embedded in the `.tif` file as tags.
+
+By tags, it means that it has some additional metadata like spatial extent, CRS, resolution, etc. along with the pixel values. It is a popular distribution format for satellite and aerial photography imagery.
+
+Use `cv2` to open the raster image;
+
+Use `gdal` to open GeoTiff
+
+### **ERDAS Imagine (.IMG)**
+
+ERDAS Imagine IMG files is a proprietary file format developed by Hexagon Geospatial. IMG files are commonly used for raster data to store single and multiple bands of satellite data.
+
+Each raster layer as part of an IMG file contains information about its data values. For example, this includes projection, statistics, attributes, pyramids and whether or not it’s a continuous or discrete type of raster.
