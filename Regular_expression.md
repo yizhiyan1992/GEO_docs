@@ -72,6 +72,24 @@
 
    reg: (a|p)yre # match "ayre" or "pyre"
 
+9. greedy and lazy match
+
+   - greedy search ".+" : In the greedy mode (by default) a quantified character is repeated as many times as possible.
+
+     a "witcth" and her "broom" is one.
+
+     =====> "witch" and her "broom"
+
+   - lazy search ".+?" : It means repeating minimal number of times. (usually a question mark `?` is a quantifier by itself (zero or one), but if added after another quantifier (or even itself) it gets another meaning - it switiches to matching mode from greedy to lazy.)
+
+10. flags
+
+    - /abc/i : i denotes case insensitive
+    - / /g : global: does not return after the first match
+    - / /m : multi-line
+
+11. back reference (advanced)
+
 ## Examples
 
 1. telephone number (11 digits)
@@ -85,3 +103,37 @@
 3. password: password must alphanumeric (@, \_ are - are also allowed) and be 8-20 characters.
 
    `^[\w@-]{8,20}$`
+
+4. match emails
+
+   pattern: (yourname) @ (domain) . (extension)(.again)
+
+   exp: `^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$`
+
+5. A string start with "The"
+
+   exp : `^The\s` (Note if using `^The` then "These" will be matched as well.)
+
+6. The quantifiers...
+
+   - `abc*` : matches: ab, abc, abcc
+   - `abc+` : matches: abc, abcc
+   - `abc?` : matches: ab, abc
+   - `abc{2,5}` : matches: abcc, abcccc
+   - `a(bc){2,5}` : matches: abcbc, abcbcbc
+
+7. OR operator - `a(b|c)` : ab or ac - `a[bc] : same as above
+
+## Application fields of Regex
+
+- data validation (check if a stime string is well-formed)
+- data scraping (find all pages that contain a certain set of words)
+- data wrangling (transform data from raw to another format)
+- string parsing (catch all URL GET parameters)
+- string replacement
+- syntax highlighting, file renaming
+
+## Documents
+
+1. validation of pattern matching: https://regex101.com/
+2. a tutorial video: https://www.youtube.com/watch?v=Eu1KRvw4tKg&list=PL4cUxeGkcC9g6m_6Sld9Q4jzqdqHd2HiD&index=16
