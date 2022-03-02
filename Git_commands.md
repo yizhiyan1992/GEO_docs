@@ -89,3 +89,57 @@ Compare changes with git diff
 `git diff branch1..branch2` will list the changes between the tips of branch1 and branch2.
 
 `git diff commit1_hash..commit2_hash` : compare two commits.
+
+The Ins and Outs of stashing
+----------------------
+Scenario where the stash will be usesd: Did some new work and change to other branches without making any commits.
+
+What happends:
+
+	- The change would come with me to the destination branch if there is no conflicts.
+	- Gir won;t let me switch if it detects potential conflict.
+
+**The key takeaway is that we need to use `git status` to check before we switch to other branches.**
+
+`git stash` : it helps you save changes that you are not yet ready to commit (both unstaged and staged).
+
+`git stash pop` : remove the most recently stashed changes in your stash and re-apply them to your working directory.
+
+Undoing changes and Time traveling
+----------------------
+**detached head**
+
+We can use `git checkout <commit-hash>` to view a previous commit. Then we are in the `detached HEAD` state.
+
+Usually, HEAD points to a latest commit of a specific branch. In the detached HEAD, we have the following options:
+
+- stay in the detached HEAD to examine the contents of the old commit.
+- leave and go back to before. (`git switch <branch_name>` or `git switch -`)
+- create a new branch and switch to it. (`git switch -c <new_branch>`)
+
+A different way to go back to previous commits:
+`git checkout HEAD~1` refers to the commit before HEAD
+
+**discard changes**
+
+`git checkout HEAD <file_name>` : Suppose we modified a file but do not want to keep them (havent added to the staging area yet). To revert the file back to whatever it looked like when you last committed. Use this command, or `git checkout -- <file_name>`.
+
+**restore command**
+
+- `git restore <file_name>`:un-modify files, which is basically the same as `git checkout HEAD <file_name>`
+- `git restore --staged <file_name>`: accidentally added a file to the staging area, and don't wish to include it in the next commit, you can use this command to remove it from staging area.
+
+**undo commits with git reset**
+
+- `git reset <commit-hash>` will reset the repo back to a specific commit. The commits are gone, but the cotents will be remained as unstaged contents. (soft version of reset)
+-`git reset --hard <commit-hash>` will reset the repo back to the specific commit and also delete associate changes.
+
+**using revert to undo changes**
+`git revert` is similar to `git reset` in that they both undo changes. But they accomplish it in different ways.
+
+- `git reset` actually moves the branch pointer backwards, eliminating commits.
+- `git revert` instead creates a brand new commit which reverses/undos the changes from a commit.
+
+Which one should I use?
+
+When collaborating with other people, use `git revert` because it is hard to track on other people's machine if using `git reset`. On the contrary, if you want to reverse commits that you havent shared with others, use reset and no one will ever know.
