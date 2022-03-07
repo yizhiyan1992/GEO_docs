@@ -143,3 +143,34 @@ A different way to go back to previous commits:
 Which one should I use?
 
 When collaborating with other people, use `git revert` because it is hard to track on other people's machine if using `git reset`. On the contrary, if you want to reverse commits that you havent shared with others, use reset and no one will ever know.
+
+The basics of GitHub
+--------------------
+Github is a service that hosts Git repositories in the cloud and makes it easier to collaborate with other people. It is an online place to share work that is doing using Git.
+
+`git clone <url>`: Git will retrieve all the files associated with the repository and will copy them to your local machine. It will also initalize a new repo on your machine, and give yuou access to the full Git history of the cloned project.
+
+**config your SSH key**
+
+You nned to be authenticated on Github to do certain operations. You generate and configure an SSH key. Once configured, you can connect to Github without having to supply your name/password everytime.
+
+**remote**
+
+Before we can push anything up to github, we need to setup a destination to push up to. In Git, we refer to these destinations as remotes. Each remote is simply a URL where a hosted repo lives.
+
+`git remote -v`:view any exisitng remotes for your repo.
+
+`git remote add <name> <url>`: add a new remote. Usually the name is set as "origin" by default.
+
+**pushing**
+
+`git push <remote> <branch>`:to push the work up to the Github, we need to specify the remote name we want to push and the specific local branch we want to push up to that remote.
+
+`git push <remote> <local_b>:<remote_b>` : when the name of local branch does not match with branch name on remote.
+
+`git push -u <remote> <branch>`: The -u option allows us to set the upstream of the branch we are pushing. A link connecting our local branch to a branch on Github. Next time, we can just use `git push`.
+
+**master & main**
+When we create a new repo on GitHub with initialized files (e.g. readme), Github will set the branch name as "main" bu default.
+
+`git branch -M main`: change the name of current branch to "main".
