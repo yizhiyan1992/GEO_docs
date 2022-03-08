@@ -174,3 +174,62 @@ Before we can push anything up to github, we need to setup a destination to push
 When we create a new repo on GitHub with initialized files (e.g. readme), Github will set the branch name as "main" bu default.
 
 `git branch -M main`: change the name of current branch to "main".
+
+**create a new repo on the command line**
+
+```
+echo "# animals">>README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin <url>
+git push -u origin main
+
+```
+`git branch -M main`:rename the branch from master to main.
+
+Fetching and Pulling
+-------------------
+When we connect a remote repo with local repo, we have 2 branches, ***branch and remote tracking branch***. 
+
+Remote tracking branch points to the point where you last communicate with this remote repo, and they folow this patter: \<remote>/\<branch>. For example, origin/master. **When making a commit locally, the remote trackong branch stay same.**
+
+`git branch -r`: view the remote branches our local repo knows about.
+
+`git status` allows you to see if the branch and remote tracking branch are on the same point.
+
+When cloning a remote repo, there is only default branch from remote repo showing on local repo (usually origin/main or origin/master).
+
+`git switch <remote-branch-name>`: create a local branch and set it up to track the remote branch with this name.
+
+**fetching**
+
+Fetching allows us to download changes from a remote repo, but those changes will not be automatically integrated into our working file. It only updates remote tracking branch.
+
+`git fecth <remote> <branch>` or `git fetch <remote>`
+
+How to see those changes after fectching?
+
+1. `git status` to indicate consistency.
+2. `git checkout <remote>/<branch>` to see changes in detached HEAD.
+
+**pulling**
+
+`git pull <remote> <branch>`: fetch the latest information from the remote branch and merge those changes into our current branch.
+
+git pull = git fetch + merge
+
+Note that git pull can result in conflicts.
+
+Before we push our code, it is recommended to pull to see if there is any conflicts first. If there is a conflict, fix and merge it, and then finally push.
+
+`git pull`: remote will default to origin, and branch will default to whatever tracking nonnection is configured for your current branch.
+
+workspace--->staging--->local repo--->remote repo
+
+1. git fecth: remote repo to local repo
+2. git pull: remote repo to workspace
+
+git fetch is safe to do anytime. Git pull is not recommened if you have uncommitted changes, because it can result in conflicts.
+
