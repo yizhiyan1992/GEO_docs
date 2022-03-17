@@ -233,3 +233,90 @@ workspace--->staging--->local repo--->remote repo
 
 git fetch is safe to do anytime. Git pull is not recommened if you have uncommitted changes, because it can result in conflicts.
 
+Github Collaborations
+----------------------
+1. centralized workflow
+
+Everyone works on the master branch (the most basic workflow possible). It is straightforward, but it has quite a few shortcomings. If there is bug on the branch, it will prevent other collaborators further pushing the code.
+
+2. feature branches
+
+All new development should be done on seperate branches. Treat master/main branch as the official project history.
+
+Rebase
+---------------------
+There are two main ways to use the git rebase command:
+
+- as an alternative to merging
+- as a cleanup tool
+
+```
+git switch feature
+git rebase master
+```
+We can rebase the feature branch onto the master branch. This moves the entire feature branch so that it begins at the tip of the master branch. All of the work is still there, but we have re-written history. (submit new commits)
+
+The golden rule: **when not to use rebase**
+
+Never rebase commits that have been shared with others. If you have already pushed commits up to github, do not rebase them unless you are positive no one on the team is using thos commits.
+
+Solve rebase conflicts:
+
+```
+git switch feature
+git rebase master
+>>>solve conflicts
+git rebase --continue 
+(or use git rebase --abort to go back)
+```
+
+**rewriting history**
+Sometimes we want to rewrite, delete, rename, or even reorder commits before sharing them.
+
+`git rebase -i HEAD~4`:interactive rebase
+
+squash and fixup?
+
+Git Tags - Making important moments in history
+--------------------
+Tags are pointers that refer to particular points in Git history. Tags are most often used to mark **version releases** in project.
+
+There are two types of tags:
+
+- lightweight tags
+- annotated tags
+
+### Semantic Versioning
+The semantic versioning spec outlines a standarized versioning system for software releases.
+
+Formats:
+
+>  version . minor version . patch version
+
+patch release: normally do not contain new features or significant changes. They typically signify bug fixes and other changes that do not impact how the code is used.
+
+Minor release: signify new featuers or functionality have been added. The project is still backward compatible. (should not force users to rewrite their own code)
+
+Major release: significant changes that is no longer backwars compatible. Features may be removed or changed substantially.
+
+There are some pre-leased version (like -beta). And when we update the minor or major release, we need to reset the number followed by it to 0.
+
+`git tag`: list all tags
+
+`git tag -l "*v16*"`: using wildcard to search specific tags
+
+`git checkout <tag_name>`: check out the status of that tag commit (in a detached head).
+
+`git diff <tag1> <tag2>` : compare the differences of two tags. For instance: `git diff v17.0.0 v17.0.1`.
+
+`git tag <tag_name>` : create lightweight tag (after commit). It points to the current HEAD.
+
+`git tag -a <tag_name>`: create an anotated tag. Git will them open your default text editor and promt you for additional info.
+
+`git show <tag_name>` : show more info about this tag.
+
+`git tag <tag_name> <commit-hash>`: tagging previous commit
+
+`git tag -d <tag_name>` : delete a tag
+
+`git push <remote-name> <tag-name>`: push a tag
