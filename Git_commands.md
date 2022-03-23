@@ -320,3 +320,53 @@ There are some pre-leased version (like -beta). And when we update the minor or 
 `git tag -d <tag_name>` : delete a tag
 
 `git push <remote-name> <tag-name>`: push a tag
+
+Git behind the scenes
+-------------------------
+### local config file
+
+The config file is for configuration. This config file is local one (per repo-basis), and there is a different one which handles global configurations.
+
+`git config --local user.name`
+
+`git config --global user.name`
+
+We can also specify different colors for changes.
+
+### Refs folder
+
+Inside of refs, you will find a heads directory. **refs/heads** contains one file per branch in a repo. Each file is named after a branch and contains the hash of the commit at the tip of the branch.
+
+Refs also contains a refs/tags folder which contains one file for each tag in the repo.
+
+### HEAD
+
+HEAD is just a text file that keeps track of where HEAD points.
+
+### Objects folder
+
+The objects directory contains all the repo files. This is where Git stores the backups of files, the commits in a repo and more. The files are all compressed and encrypted, so thet won't look like much.
+
+And there are 4 types of git objects: commit, tree, blob, and annotated tag.
+
+Git is a key-value data store. We can insert any kind of content into a Git repo, and Git will hand us back a unique key we can later use to retrieve that content. (SHA-1 hasing, which returns 40 digits hexadecimal numbers.)
+
+`git hash-object <file>`: get the hash key for storing file (not really storing it)
+
+> `echo "hello" | git hash-object --stdin -w`
+
+Retrieve the content by hash key
+
+> `git cat-file -p <hash_code>` #-p stands for pretty print
+
+### Blob
+
+Git blobs (binary large object) are the object type Git uses to store the contents of files in a given repo. Blobs dont even include the filenames or any other data. They just store the contents of a file.
+
+### Trees
+
+Trees are git objects used to store the contents of a directory. Each tree contains pointers that can refer to blobs and to other trees.
+
+### Commits
+
+Commit objects combine a tree object aling with information about the context that led to the current tre. It stores: tree, pointer to the parent, committer, author, and commit message.
