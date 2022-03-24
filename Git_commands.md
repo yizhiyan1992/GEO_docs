@@ -370,3 +370,45 @@ Trees are git objects used to store the contents of a directory. Each tree conta
 ### Commits
 
 Commit objects combine a tree object aling with information about the context that led to the current tre. It stores: tree, pointer to the parent, committer, author, and commit message.
+
+the power of Reflog
+--------------------------
+Git keeps a record of when the tips of branches and other references were updated in the repo.
+
+Git only keeps reflogs on your local activity. They are not shared with collaborators.
+
+`git reflog show HEAD`: will show the log of a specific reference (here is HEAD pointer)
+
+`git reflog show <branch_name>`
+
+We can access specific git refs using `name@{qualifer}`. We can use this syntax to access specific ref pointers and can pass them to other commands including checkout, reset and merge.
+
+We can sometimes use reflog entries to access commits that seem lost and are not appearing in the git log.
+
+Undo an interactive rebase:
+
+```
+git reflog show <branch>
+git log --oneline
+git reset --hard <commit_hash>
+```
+
+Customize Git Alias
+-------------------
+Global git config: it is stored at **~/.gitconfig**
+
+set up an alias manually:
+
+```
+[alias]
+	s = status
+	cm = commit
+```
+
+or we can make an alias in the shell:
+
+```
+git config --global alias.s status
+git config --global alias.cm commit -m
+```
+
